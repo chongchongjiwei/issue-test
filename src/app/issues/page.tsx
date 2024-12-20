@@ -27,7 +27,8 @@ return (
           {issues.map((issue:any) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                {issue.title}
+                {/* {issue.title} */}
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                 </Table.Cell>
 
                 <Table.Cell className="block md:hidden">
