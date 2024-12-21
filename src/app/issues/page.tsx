@@ -1,5 +1,5 @@
 import { Button, Table } from "@radix-ui/themes";
-import Link from "next/link";
+import Link from "../components/link";
  import prisma from "@/app/client";
 import delay from "delay";
 import IssueStatusBadge from "../components/IssueStatusBadge";

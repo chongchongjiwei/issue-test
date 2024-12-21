@@ -16,7 +16,7 @@ const DetailIssuesPage= ()=>{
   <p><Skeleton/></p>
   <Text><Skeleton/></Text >
 </Flex>
-<Card><Skeleton/></Card>
+<Card className="prose"><Skeleton count={3}/></Card>
 </div>
     )
 }
