@@ -18,6 +18,7 @@ const DetailIssuesPage= ()=>{
 </Flex>
 <Card className="prose"><Skeleton count={3}/></Card>
 </div>
+
     )
 }
 

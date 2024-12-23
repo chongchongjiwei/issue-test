@@ -1,8 +1,9 @@
 "use client";
-import  {ErrorMessage, Spinner } from "@/app/components";
+import { ErrorMessage, Spinner } from "@/app/components";
 import { createIssueSchema } from "@/app/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  TextArea ,Button, Callout, TextField } from "@radix-ui/themes";
+import { Issue } from "@prisma/client";
+import { TextArea, Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
@@ -20,7 +21,11 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
-const NewIssuePage = () => {
+interface Props {
+  issue?: Issue;
+}
+
+const IssueForm = ({issue}:{issue?:Issue}) => {
   const {
     register,
     control,
@@ -53,14 +58,15 @@ const NewIssuePage = () => {
           }
         })}
       >
-        <TextField.Root placeholder="Title" {...register("title")}>
-        
+        <TextField.Root defaultValue={issue?.title} placeholder="Title" {...register("title")}>
+
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
+          defaultValue={issue?.description}
           control={control}
-          render={({ field }:any) => (
+          render={({ field }: any) => (
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
@@ -72,4 +78,4 @@ const NewIssuePage = () => {
     </div>
   );
 };
-export default NewIssuePage;
+export default IssueForm;
