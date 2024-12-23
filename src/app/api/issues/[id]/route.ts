@@ -3,12 +3,14 @@ import { issueSchema } from "./validationSchema";
 import prisma from "@/app/client";
 import { describe } from "node:test";
 
-interface Props{
-    params:{params:{id:string}}
+// interface Props{
+//     params:{params:{id:string}}
+// }
+interface Props {
+    params: { id: string }
 }
 
-
-export async function PATCH(request:NextRequest,{params}:{params:{id:string}})
+export async function PATCH(request:NextRequest, { params }: { params: { id: string } })
 {
     const body = await request.json();
     const validation= issueSchema.safeParse(body);
