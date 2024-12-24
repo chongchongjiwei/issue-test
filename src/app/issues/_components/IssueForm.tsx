@@ -11,13 +11,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import SimpleMDE from 'react-simplemde-editor'
 
 
 
 
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -25,7 +23,7 @@ interface Props {
   issue?: Issue;
 }
 
-const IssueForm = ({issue}:{issue?:Issue}) => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
   const {
     register,
     control,
@@ -50,11 +48,12 @@ const IssueForm = ({issue}:{issue?:Issue}) => {
         onSubmit={handleSubmit(async (data) => {
           try {
             setSubmitting(true);
-            if(issue)
-              await axios.patch('/api/issues/'+issue.id,data)
+            if (issue)
+              await axios.patch('/api/issues/' + issue.id, data)
             else
-               await axios.post("/api/issues", data);
+              await axios.post("/api/issues", data);
             router.push("/issues");
+            router.refresh();
           } catch (error) {
             setSubmitting(false);
             setError("An unexpected Error occured!");
@@ -75,7 +74,7 @@ const IssueForm = ({issue}:{issue?:Issue}) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          {issue?'Update Issue':"Submit New Issue"}{' '}
+          {issue ? 'Update Issue' : "Submit New Issue"}{' '}
           {isSubmitting && <Spinner />}
         </Button>
       </form>
