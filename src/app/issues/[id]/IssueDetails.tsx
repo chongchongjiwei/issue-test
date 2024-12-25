@@ -7,11 +7,11 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
   return (
     <>
       <Heading as="h2">{issue.title}</Heading>
-      <Flex gap="3" my="5">
+      <Flex className="lg:space-x-4" my="5">
         <IssueStatusBadge status={issue.status}></IssueStatusBadge>
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
-      <Card className="prose">
+      <Card className="prose max-w-full" mt='4'>
         <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </>

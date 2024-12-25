@@ -8,6 +8,7 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
+import DeleteIssueButton from "./DeleteIssueButton";
 interface Props {
   params: { id: string };
 }
@@ -27,12 +28,15 @@ const IssueDeatilPage = async ({ params }: Props) => {
   if (!issue) notFound();
 //解耦合，用不同组件区分开
   return (
-    <Grid columns={{ initial: "1", md: "2" }} gap="5">
-      <Box>
+    <Grid columns={{ initial: "1", sm: "5" }} gap="5">
+      <Box className="md:col-span-4">
         <IssueDetails issue={issue}></IssueDetails>
         </Box>
       <Box>
+        <Flex direction="column" gap='4'>
        <EditIssueButton issueId={issue.id}></EditIssueButton>
+       <DeleteIssueButton issueId={issue.id}></DeleteIssueButton>
+       </Flex>
       </Box>
     </Grid>
 
